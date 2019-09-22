@@ -10,10 +10,20 @@ const rl = readline.createInterface({
 
 function pigLatin(word) {
 
-  // Your code here
+word = word.trim().toLowerCase();
 
+let vowelLetters = /[a,e,i,o,u]/;
+
+if (word[0].match(vowelLetters)){
+  return word + 'yay';
+}else {
+  let indexWord = word.indexOf(word.match(vowelLetters));
+  let firstHalf = word.substring(0, indexWord);
+  let secondHalf = word.substring(indexWord);
+  return secondHalf + firstHalf + 'ay';
 }
 
+}
 
 function getPrompt() {
   rl.question('word ', (answer) => {
