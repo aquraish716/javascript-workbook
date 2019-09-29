@@ -1,0 +1,94 @@
+body {
+    width: 100%;
+    height: auto;
+    background-color: rgb(155, 213, 247);
+}
+
+header {
+    width: 100%;
+    height: 15%;
+    text-align: center;
+}
+
+main {
+    width: 100%;
+    height: 85%;
+}
+
+.tictactable {
+    margin:auto;
+    list-style: none;
+    width: 80%;
+    height: 100%;
+    display: grid;
+    background-color: rgb(125, 225, 243);
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "box1 box2 box3"
+        "box4 box5 box6"
+        "box7 box8 box9";
+}
+
+li {
+    width: 100%;
+    height: 100%;
+    font-size: 8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.box1 {
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    grid-area: box1;
+}
+
+.box2 {
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    grid-area: box2;
+}
+
+.box3 {
+    border-bottom: 2px solid black;
+    grid-area: box3;
+}
+
+.box4 {
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    grid-area: box4;
+}
+
+.box5 {
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    grid-area: box5;
+}
+
+.box6 {
+    border-bottom: 2px solid black;
+    grid-area: box6;
+}
+
+.box7 {
+    border-right: 2px solid black;
+    grid-area: box7;
+}
+
+.box8 {
+    border-right: 2px solid black;
+    grid-area: box8;
+}
+
+.box9 {
+    grid-area: box9;
+}
+
+li:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
