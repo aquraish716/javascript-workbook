@@ -65,19 +65,17 @@ function ticTacToe(row, column) {
     return playerTurn;
   }
   checkForWin();
+  
   if (playerTurn == 'X') {
     playerTurn = 'O';
-    let playerX = document.getElementById('b'+row+column);
-    playerX.innerHTML = 'X';
     checkForWin();
-    
   }
   else if (playerTurn == 'O') {
     playerTurn = 'X';
-    let playerO = document.getElementById('b'+row+column);
-    playerO.innerHTML = 'O';
     checkForWin();
-  } 
+  }else {
+    return false
+  }
 
 function getPrompt() {
   printBoard();
@@ -90,7 +88,7 @@ function getPrompt() {
   });
 
 }
-
+}
 // Tests
 
 if (typeof describe === 'function') {
@@ -124,4 +122,4 @@ if (typeof describe === 'function') {
 
     getPrompt();
 
-}}
+}
