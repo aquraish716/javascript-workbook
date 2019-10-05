@@ -19,24 +19,52 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece() {
-  // Your code here
+function movePiece(startStack, endStack) {
+  //created two variable to. One is the array you are starting with and the other is the array you are ending in
+  let currentArray = stacks[startStack];
+  let toArray = stacks[endStack];
 
+  //used push to push whatever was popped from the currentArray onto the toArray (destination array)
+  toArray.push(currentArray.pop());
 }
 
-function isLegal() {
-  // Your code here
+function isLegal(startStack, endStack) {
+  //created currentArra and toArray variables for isLegal function
+  let currentArray = stacks[startStack];
+  let toArray = stacks[endStack];
+  //created currentArrayStart variable which is the equal to the starting array's last index (length-1)
+  let currentArrayStart = stacks[startStack][currentArray.length - 1];
+  //created currentArrayEnd variable which is the equal to the destination array's last index (length-1)
+  let currentArrayEnd = stacks[endStack][toArray.length - 1];
 
+  /*created if statement that checks to see if the last index of starting array (which is the one being moved) 
+  is less than the last index of the destination arrays or if the destination array is undefined (which 
+  means nothing is in that array) then return true.*/
+  if (currentArrayStart < currentArrayEnd || currentArrayEnd === undefined){
+    return true;
+  }else{
+    return false;
+  }
 }
 
-function checkForWin() {
-  // Your code here
-
+function checkForWin(startStack, endStack) {
+/*created if statement that checks to see if array b or array c's length is equal to 4 then return true as the 
+numbers have been successfully legally moved to array b or c.*/
+if(stacks.b.length == 4 || stacks.c.length == 4){
+  console.log("You've won!");
+  return true;
+}else {
+  return false;
+}
 }
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
-
+  /* created if statement that checks to see if the isLegal function is true, 
+  then run the movePiece function then check for a winner.*/
+  if(isLegal(startStack, endStack)){
+    movePiece(startStack, endStack);
+    checkForWin;
+  } 
 }
 
 function getPrompt() {
