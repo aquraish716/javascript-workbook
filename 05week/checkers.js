@@ -7,14 +7,23 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
-function Checker() {
-  // Your code here
+//created if else to have the this.symbol as either black or white.
+class Checker {
+  constructor(color){
+      if(color === 'white'){
+        this.symbol = String.fromCharCode(0x125CB);
+      }else {
+        this.symbol = String.fromCharCode(0x125CF);
+      }
+  }
 }
+
 
 class Board {
   constructor() {
-    this.grid = []
+    this.grid = [];
+    //added this.checkers array
+    this.checkers = [];
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -53,7 +62,54 @@ class Board {
   }
 
   // Your code here
+//created a createCheckers with white and black positions with each having a row, column. 
+createCheckers() {
+let whitePositions = [
+[0, 1], [0, 3], [0, 5], [0, 7],
+[1, 0], [1, 2], [1, 4], [1, 6],
+[2, 1], [2, 3], [2, 5], [2, 7]
+  ];
+
+let blackPositions = [
+[5, 0], [5, 2], [5, 4], [5, 6],
+[6, 1], [6, 3], [6, 5], [6, 7],
+[7, 0], [7, 2], [7, 4], [7, 6]
+];
+let whiteCheckerLen = whitePositions.length;
+//created for loop to loop through the length of white array and create an instance of white
+//then created the row and coloumn for white position and had it pushed to checkers array.
+for(let i =0; i < whiteCheckerLen; i++){
+  let whiteChecker = new Checker('white');
+  let row = whitePositions[i][0];
+  let column = whitePositions[i][1];
+  this.grid[row][column] = whiteChecker;
+  this.checkers.push(whiteChecker);
 }
+//created for loop to loop through the length of black array and create an instance of white
+//then created the row and coloumn for black position and had it pushed to checkers array.
+let blackCheckerLen = blackPositions.length;
+for(let i =0; i < blackCheckerLen; i++){
+  let blackChecker = new Checker('black');
+  let row = blackPositions[i][0];
+  let column = blackPositions[i][1];
+  this.grid[row][column] = blackChecker;
+  this.checkers.push(blackChecker);
+}
+};
+//created a select checker with parameters of row and column that return those parameters to this.grid
+selectChecker(row, column){
+  return this.grid[row][column];
+
+};
+
+//created a killchecker function to kill a checker by using splice and the indexof to remove from array
+killChecker(position){
+  let checker = this.selectChecker(position.charAt(0), position.charAt(1));
+    let indexChecker = this.checkers.indexOf(checker);
+    this.checkers.splice(indexChecker, 1);
+    this.grid[position.charAt(0)][position.charAt(1)] = null;
+  }
+};
 
 class Game {
   constructor() {
@@ -61,7 +117,24 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.createCheckers();
   }
+  //created a movechecker function to move a checker from one position on array to another by using the charAt of position
+  //it also uses the killChecker function when moved
+moveChecker(start, end) {
+  let checker = this.board.selectChecker(start.charAt(0), start.charAt(1));
+      this.board.grid[start.charAt(0)][start.charAt(1)] = null;
+      this.board.grid[end.charAt(0)][end.charAt(1)] = checker;
+
+
+let start1 = Math.abs(start.charAt(0) - end.charAt(0));
+let startParse = parseInt(start);
+let endParse = parseInt(end);
+      if(start1 === 2 && start1 === 2) {
+        let killPiece = (startParse + endParse) / 2;
+          this.board.killChecker(killPiece.toString());
+      }
+    }
 }
 
 function getPrompt() {
